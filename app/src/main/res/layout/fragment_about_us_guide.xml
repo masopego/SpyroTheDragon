@@ -29,7 +29,7 @@
         android:id="@+id/textStep"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/bubble_world"
+        android:text="@string/bubble_about_us"
         android:gravity="center"
         android:maxLines="5"
         android:padding="20dp"

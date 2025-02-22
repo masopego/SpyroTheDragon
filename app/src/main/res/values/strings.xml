@@ -23,4 +23,12 @@
 
     <string name="exit_guide_button">Saltar guía</string>
     <string name="next_button">Siguiente</string>
+
+
+    <string name="close_guide_title">¡Ya estás listo para usar la aplicación!</string>
+    <string name="close_guide_subtitle">Ahora es tu turno de explorar el mundo mágico</string>
+    <string name="close_guide_text1">Pincha en la pestaña de "Personajes" del mundo mágico.</string>
+    <string name="close_guide_text2">Navega por los diferentes mundos</string>
+    <string name="close_guide_text3">Y visita las colecciones</string>
+    <string name="close_guide_button">Terminar guía</string>
 </resources>

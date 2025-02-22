@@ -6,7 +6,11 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@color/transparent_purple"
-    android:padding="20sp">
+    android:id="@+id/guideLayout"
+    android:padding="20sp"
+    android:clickable="true"
+    android:focusable="true"
+    >
 >
 
     <TextView
@@ -26,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/welcome_subtitle"
-        style="@style/WelcomeTextStyle"
+        style="@style/TextStyle"
         />
 
     <ImageView
@@ -48,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/welcome_text1"
-        style="@style/WelcomeTextStyle"
+        style="@style/TextStyle"
         />
 
     <TextView
@@ -56,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/welcome_text2"
-        style="@style/WelcomeTextStyle"
+        style="@style/TextStyle"
         />
 
         <TextView
@@ -64,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/welcome_text3"
-            style="@style/WelcomeTextStyle"
+            style="@style/TextStyle"
             />
 
     </LinearLayout>
@@ -88,11 +92,17 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/welcome_button"
-            android:textSize="20sp"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textAllCaps="true"/>
+            style="@style/ButtonStyle"/>
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/exit_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/exit_guide_button"
+        android:background="@android:color/transparent"
+        style="@style/ExitGuideButtonStyle"
+        />
 
 
 </LinearLayout>
