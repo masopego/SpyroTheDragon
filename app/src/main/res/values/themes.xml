@@ -1,6 +1,8 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.SpyroTheDragon" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.SpyroTheDragon" parent="Theme.Material3.DayNight">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
         <item name="colorPrimary">@color/purple</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="android:statusBarColor">?attr/colorPrimary</item>
