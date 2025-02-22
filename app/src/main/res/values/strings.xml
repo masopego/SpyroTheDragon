@@ -4,6 +4,31 @@
     <string name="characters">Personajes</string>
     <string name="collectibles">Coleccionables</string>
     <string name="title_about">Acerca de</string>
-    <string name="text_about">Aplicación desarrollada por \n <b>Lindsay Barrero Martínez.</b></string>
+    <string name="text_about">Aplicación desarrollada por \n <b>María Soledad Peña Gómez.</b></string>
     <string name="accept">Aceptar</string>
+
+    <!-- Guide -->
+    <string name="welcome_title">Bienvenido</string>
+    <string name="welcome_subtitle">Prepárate para explorar el mundo mágico de esta aplicación inspirada en</string>
+    <string name="welcome_text1">Aquí aprenderás a navegar por pestañas llenas de dragones, mundos fascinantes y montones de tesoros brillantes.</string>
+    <string name="welcome_text2">¿Listo para empezar?</string>
+    <string name="welcome_text3">Pulsa "Comenzar" y deja que Spyro te lleve volando a través de esta guía interactiva</string>
+    <string name="welcome_button">Comenzar</string>
+    <string name="welcome_image_description">Spyro</string>
+
+    <string name="bubble_character">Aquí podrás explorar a todos los personajes del mundo de Spyro</string>
+    <string name="bubble_world">Aquí podrás explorar a todos los mundos de Spyro</string>
+    <string name="bubble_collectibles">Aquí podrás conocer más sobre las colecciones de Spyro</string>
+    <string name="bubble_about_us">Conoce más sobre la aplicación</string>
+
+    <string name="exit_guide_button">Saltar guía</string>
+    <string name="next_button">Siguiente</string>
+
+
+    <string name="close_guide_title">¡Ya estás listo para usar la aplicación!</string>
+    <string name="close_guide_subtitle">Ahora es tu turno de explorar el mundo mágico</string>
+    <string name="close_guide_text1">Pincha en la pestaña de "Personajes" del mundo mágico.</string>
+    <string name="close_guide_text2">Navega por los diferentes mundos</string>
+    <string name="close_guide_text3">Y visita las colecciones</string>
+    <string name="close_guide_button">Terminar guía</string>
 </resources>
