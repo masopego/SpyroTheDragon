@@ -1,0 +1,98 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/transparent_purple"
+    android:padding="20sp">
+>
+
+    <TextView
+        android:id="@+id/titleWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome_title"
+        android:textSize="44sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:layout_marginBottom="5sp"
+        />
+
+    <TextView
+        android:id="@+id/subtitleWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome_subtitle"
+        style="@style/WelcomeTextStyle"
+        />
+
+    <ImageView
+        android:id="@+id/spyroTitleImage"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:contentDescription="@string/welcome_image_description"
+        android:src="@drawable/spyro_title"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="start"
+        android:padding="20sp"
+        >
+    <TextView
+        android:id="@+id/text1Welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome_text1"
+        style="@style/WelcomeTextStyle"
+        />
+
+    <TextView
+        android:id="@+id/text2Welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome_text2"
+        style="@style/WelcomeTextStyle"
+        />
+
+        <TextView
+            android:id="@+id/text3Welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome_text3"
+            style="@style/WelcomeTextStyle"
+            />
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <ImageButton
+        android:id="@+id/btnStart"
+        android:layout_width="183dp"
+        android:layout_height="157dp"
+        android:layout_gravity="center"
+        android:backgroundTint="@null"
+        android:background="@drawable/diamond"
+        android:contentDescription="@string/welcome_button"
+        android:padding="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/welcome_button"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textAllCaps="true"/>
+    </RelativeLayout>
+
+
+</LinearLayout>
