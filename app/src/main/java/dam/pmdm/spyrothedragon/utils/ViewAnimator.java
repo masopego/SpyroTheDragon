@@ -23,4 +23,11 @@ public class ViewAnimator {
         animator.setInterpolator(new AccelerateDecelerateInterpolator());
         animator.start();
     }
+
+    public static void animateAlpha(View view, float startValue, float endValue, long duration) {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(view, "alpha", startValue, endValue);
+        animator.setDuration(duration);
+        animator.setInterpolator(new AccelerateDecelerateInterpolator());
+        animator.start();
+    }
 }

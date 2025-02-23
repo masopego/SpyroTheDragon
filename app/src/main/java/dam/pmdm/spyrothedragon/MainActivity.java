@@ -1,17 +1,11 @@
 package dam.pmdm.spyrothedragon;
 
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -21,12 +15,14 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
-
 import dam.pmdm.spyrothedragon.databinding.ActivityMainBinding;
 import dam.pmdm.spyrothedragon.databinding.FragmentCharactersGuideBinding;
+import dam.pmdm.spyrothedragon.databinding.FragmentCollectiblesGuideBinding;
 import dam.pmdm.spyrothedragon.databinding.FragmentWelcomeBinding;
 import dam.pmdm.spyrothedragon.databinding.FragmentWorldsGuideBinding;
+import dam.pmdm.spyrothedragon.utils.BubbleCoordinates;
+import dam.pmdm.spyrothedragon.utils.BubblePosition;
+import dam.pmdm.spyrothedragon.utils.BubblePositionCalculator;
 import dam.pmdm.spyrothedragon.utils.ViewAnimator;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentWelcomeBinding welcomeBinding;
     private FragmentCharactersGuideBinding charactersGuideBinding;
     private FragmentWorldsGuideBinding worldsGuideBinding;
+    private FragmentCollectiblesGuideBinding collectibleGuideBinding;
 
     private Boolean needToStartGuide = true;
 
@@ -49,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
         welcomeBinding = binding.includeLayout;
         charactersGuideBinding = binding.includeCharacterLayout;
         worldsGuideBinding = binding.includeWorldsLayout;
+        collectibleGuideBinding = binding.includeCollectibleLayout;
+
 
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
@@ -107,58 +106,76 @@ public class MainActivity extends AppCompatActivity {
         charactersGuideBinding.characterGuideLayout.setVisibility(View.VISIBLE);
 
         ImageView bubble = charactersGuideBinding.bubble;
-        View navigationView = binding.navView;
-
-
-
+        ViewAnimator.animateAlpha(bubble, 0f, 0.5f, 1000);
 
         bubble.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override
             public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                // Obtener el ancho de la pantalla
-                DisplayMetrics displayMetrics = new DisplayMetrics();
-                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-                int screenWidth = displayMetrics.widthPixels;
-                int heightPixels = displayMetrics.heightPixels;
-// 1070
-// Calcular el ancho de la burbuja
-                int bubbleWidth = v.getWidth();
-                int menuButtonWidth = screenWidth / 3;
 
-                int firstPosition = (menuButtonWidth/2) - bubbleWidth/2;
-                int secondPosition = menuButtonWidth+(menuButtonWidth/2) -bubbleWidth/2;
-                int thirdPosition = menuButtonWidth*2+(menuButtonWidth/2)- bubbleWidth/2;
-                // Elimina el listener si solo necesitas obtenerlo una vez
+                BubbleCoordinates position = new BubblePositionCalculator(v, bubble, getWindowManager()).getPosition(BubblePosition.CHARACTERS);
+
+                bubble.setX(position.getX());
+                bubble.setY(position.getY());
                 bubble.removeOnLayoutChangeListener(this);
 
-                float bubbleX = secondPosition; // O usa firstPosition o thirdPosition según sea necesario
-
-// La burbuja sigue estando en la parte inferior, solo ajustamos X.
-                bubble.setX(bubbleX);
-                bubble.setY(heightPixels-(bubble.getHeight()/3*2));
             }
         });
 
-        // Configurar botón "Siguiente"
         charactersGuideBinding.btnNext.setOnClickListener(v -> initializeNavigationGuide2());
-    }
-
-    private int[] getViewPosition(View view) {
-        int[] location = new int[2];
-        view.getLocationOnScreen(location);
-        return location;
     }
 
     private void initializeNavigationGuide2() {
         navController.navigate(R.id.navigation_worlds);
         charactersGuideBinding.characterGuideLayout.setVisibility(View.GONE);
         worldsGuideBinding.worldsGuideLayout.setVisibility(View.VISIBLE);
+
+        ImageView bubble = worldsGuideBinding.bubble;
+        ViewAnimator.animateAlpha(bubble, 0f, 0.5f, 1000);
+
+
+        bubble.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+
+                BubbleCoordinates position = new BubblePositionCalculator(v, bubble, getWindowManager()).getPosition(BubblePosition.WORLD);
+
+                bubble.setX(position.getX());
+                bubble.setY(position.getY());
+                bubble.removeOnLayoutChangeListener(this);
+
+            }
+        });
+
         worldsGuideBinding.btnNext.setOnClickListener(v->initializeNavigationGuide3());
     }
 
     private void initializeNavigationGuide3() {
-        worldsGuideBinding.worldsGuideLayout.setVisibility(View.GONE);
         navController.navigate(R.id.navigation_collectibles);
+        worldsGuideBinding.worldsGuideLayout.setVisibility(View.GONE);
+        collectibleGuideBinding.collectiblesGuideLayout.setVisibility(View.VISIBLE);
+
+        ImageView bubble = collectibleGuideBinding.bubble;
+        ViewAnimator.animateAlpha(bubble, 0f, 0.5f, 1000);
+
+
+        bubble.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+
+                BubbleCoordinates position = new BubblePositionCalculator(v, bubble, getWindowManager()).getPosition(BubblePosition.COLLECTIBLES);
+
+                bubble.setX(position.getX());
+                bubble.setY(position.getY());
+                bubble.removeOnLayoutChangeListener(this);
+
+            }
+        });
+
+        collectibleGuideBinding.btnNext.setOnClickListener(v->initializeNavigationGuide4());
+    }
+
+    private void initializeNavigationGuide4() {
+        collectibleGuideBinding.collectiblesGuideLayout.setVisibility(View.GONE);
     }
 
     private void onExitGuide(View view) {
@@ -166,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
         welcomeBinding.guideLayout.setVisibility(View.GONE);
         charactersGuideBinding.characterGuideLayout.setVisibility(View.GONE);
         worldsGuideBinding.worldsGuideLayout.setVisibility(View.GONE);
+        collectibleGuideBinding.collectiblesGuideLayout.setVisibility(View.GONE);
     }
 
 
@@ -183,14 +201,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Infla el menú
         getMenuInflater().inflate(R.menu.about_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Gestiona el clic en el ítem de información
         if (item.getItemId() == R.id.action_info) {
             showInfoDialog();  // Muestra el diálogo
             return true;
@@ -199,7 +215,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showInfoDialog() {
-        // Crear un diálogo de información
         new AlertDialog.Builder(this)
                 .setTitle(R.string.title_about)
                 .setMessage(R.string.text_about)
