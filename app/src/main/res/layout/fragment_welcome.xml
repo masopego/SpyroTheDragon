@@ -10,6 +10,7 @@
     android:padding="20sp"
     android:clickable="true"
     android:focusable="true"
+    android:visibility="gone"
     >
 >
 
