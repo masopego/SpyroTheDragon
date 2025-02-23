@@ -62,4 +62,12 @@
     <include
         android:id="@+id/includeCollectibleLayout"
         layout="@layout/fragment_collectibles_guide"/>
+
+    <include
+        android:id="@+id/includeAboutUsLayout"
+        layout="@layout/fragment_about_us_guide"/>
+
+    <include
+        android:id="@+id/includeCloseGuideLayout"
+        layout="@layout/fragment_close_guide"/>
 </RelativeLayout>
