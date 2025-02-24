@@ -25,12 +25,14 @@ import dam.pmdm.spyrothedragon.databinding.FragmentWorldsGuideBinding;
 import dam.pmdm.spyrothedragon.utils.BubbleCoordinates;
 import dam.pmdm.spyrothedragon.utils.BubblePosition;
 import dam.pmdm.spyrothedragon.utils.BubblePositionCalculator;
+import dam.pmdm.spyrothedragon.utils.SoundManager;
 import dam.pmdm.spyrothedragon.utils.ViewAnimator;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     NavController navController = null;
+    private SoundManager soundManager;
 
     private FragmentWelcomeBinding welcomeBinding;
     private FragmentCharactersGuideBinding charactersGuideBinding;
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         preferencesManager = new PreferencesManager(this);
         needToStartGuide = preferencesManager.isShowTheGuide();
+        soundManager = new SoundManager(this);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
 
@@ -69,8 +72,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         binding.navView.setOnItemSelectedListener(this::selectedBottomMenu);
-
-
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             if (destination.getId() == R.id.navigation_characters ||
                     destination.getId() == R.id.navigation_worlds ||
@@ -85,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         initializeGuide();
-
     }
 
     private void initializeGuide() {
@@ -104,7 +104,10 @@ public class MainActivity extends AppCompatActivity {
         ViewAnimator.animateTranslationX(spyroImage, -50f, 50f, 3000);
         ViewAnimator.animateTranslationY(btnStart, -15f, 15f, 1000);
 
-        welcomeBinding.btnStart.setOnClickListener(v ->initializeNavigationGuide());
+        welcomeBinding.btnStart.setOnClickListener(v -> {
+            soundManager.play(R.raw.gems);
+            initializeNavigationGuide();
+        });
     }
 
     private void initializeNavigationGuide() {
@@ -128,18 +131,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        charactersGuideBinding.btnNext.setOnClickListener(v -> initializeNavigationGuide2());
+        charactersGuideBinding.btnNext.setOnClickListener(v -> {
+            soundManager.play(R.raw.sheep);
+            initializeNavigationGuide2();
+        });
     }
 
     private void initializeNavigationGuide2() {
         navController.navigate(R.id.navigation_worlds);
+
         charactersGuideBinding.characterGuideLayout.setVisibility(View.GONE);
         worldsGuideBinding.worldsGuideLayout.setVisibility(View.VISIBLE);
         worldsGuideBinding.exitGuide.setOnClickListener(this::onExitGuide);
 
         ImageView bubble = worldsGuideBinding.bubble;
         ViewAnimator.animateAlpha(bubble, 0f, 0.5f, 2000);
-
 
         bubble.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override
@@ -154,18 +160,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        worldsGuideBinding.btnNext.setOnClickListener(v->initializeNavigationGuide3());
+        worldsGuideBinding.btnNext.setOnClickListener(v -> {
+            soundManager.play(R.raw.sheep);
+            initializeNavigationGuide3();
+        });
     }
 
     private void initializeNavigationGuide3() {
         navController.navigate(R.id.navigation_collectibles);
+        overridePendingTransition(R.transition.fade, R.transition.slide);
         worldsGuideBinding.worldsGuideLayout.setVisibility(View.GONE);
         collectibleGuideBinding.collectiblesGuideLayout.setVisibility(View.VISIBLE);
         collectibleGuideBinding.exitGuide.setOnClickListener(this::onExitGuide);
 
         ImageView bubble = collectibleGuideBinding.bubble;
         ViewAnimator.animateAlpha(bubble, 0f, 0.5f, 2000);
-
 
         bubble.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override
@@ -180,7 +189,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        collectibleGuideBinding.btnNext.setOnClickListener(v->initializeNavigationGuide4());
+        collectibleGuideBinding.btnNext.setOnClickListener(v -> {
+            soundManager.play(R.raw.sheep);
+            initializeNavigationGuide4();
+        });
     }
 
     private void initializeNavigationGuide4() {
@@ -191,14 +203,20 @@ public class MainActivity extends AppCompatActivity {
         ImageView bubble = aboutUsGuideBinding.bubble;
         ViewAnimator.animateAlpha(bubble, 0f, 0.5f, 2000);
 
-        aboutUsGuideBinding.btnNext.setOnClickListener(v->initializeNavigationCloseGuide());
+        aboutUsGuideBinding.btnNext.setOnClickListener(v -> {
+            soundManager.play(R.raw.sheep);
+            initializeNavigationCloseGuide();
+        });
 
     }
 
     private void initializeNavigationCloseGuide() {
         aboutUsGuideBinding.aboutUsGuideLayout.setVisibility(View.GONE);
         closeGuideBinding.closeGuideLayout.setVisibility(View.VISIBLE);
-        closeGuideBinding.exitGuide.setOnClickListener(this::onExitGuide);
+        closeGuideBinding.exitGuide.setOnClickListener(v -> {
+            soundManager.play(R.raw.confetti);
+            onExitGuide(v);
+        });
     }
 
     private void onExitGuide(View view) {
@@ -252,5 +270,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (soundManager != null) {
+            soundManager.release();
+        }
+    }
 
 }
